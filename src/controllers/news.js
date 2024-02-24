@@ -3,31 +3,31 @@ const News = require("../models/news");
 const addNews = async (params) => {
     const { title, description, matchId, tourId } = params;
     if (!title || !description) {
-        return new Error("Missing required fields !!");
+        throw new Error("Missing required fields !!");
     }
     return await News.createNews(params);
 };
 
 const getNewsByMatchId = async (params) => {
-    const { matchId } = params.matchId;
+    const matchId = params.matchId || null;
     if (!matchId) {
-        return new Error("Missing required query parameter: matchId !!");
+        throw new Error("Missing required query parameter: matchId !!");
     }
     return await News.findNewsByMatchId(params);
 };
 
 const getNewsByTourId = async (params) => {
-    const { tourId } = params.tourId;
+    const tourId = params.tourId || null;
     if (!tourId) {
-        return new Error("Missing required query parameter: tourId !!");
+        throw new Error("Missing required query parameter: tourId !!");
     }
     return await News.findNewsByTourId(params);
 };
 
 const getNewsBySportId = async (params) => {
-    const { sportId } = params.sportId;
-    if (!sportId) {
-        return new Error("Missing required query parameter: sportId !!");
+    const sportId = params.sportId || null;
+    if (sportId == null) {
+        throw new Error("Missing required query parameter: sportId !!");
     }
     return await News.findNewsBySportId(params);
 };

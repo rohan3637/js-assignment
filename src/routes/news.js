@@ -4,8 +4,8 @@ module.exports = function (app) {
     app.route("/news").post(async (req, res, next) => {
         try {
             let params = req.body;
-            let result = await News.addNews(params);
-            return res.status(201).json(result);
+            await News.addNews(params);
+            return res.status(201).json("News inserted successfully !!");
         } catch (err) {
             return next(err);
         }
