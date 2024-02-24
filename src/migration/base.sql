@@ -35,6 +35,16 @@ create table if not exists mydb.matches
     foreign key (tourId) references tours(id)
 );
 
+CREATE TABLE IF NOT EXISTS mydb.news (
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    matchId INT,
+    tourId INT,
+    FOREIGN KEY (matchId) REFERENCES matches(id),
+    FOREIGN KEY (tourId) REFERENCES tours(id)
+);
+
 -- seed data
 insert ignore into mydb.sports (id, name) values (1, 'Cricket');
 insert ignore into mydb.sports (id, name) values (2, 'Football');
@@ -55,3 +65,8 @@ insert ignore into mydb.matches (name, tourId, format, startTime, endTime) value
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('IND vs WI', 3, 'ODI', '2023-06-12 10:00:00', '2023-06-12 23:00:00');
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('IND vs WI', 3, 'ODI', '2023-06-14 10:00:00', '2023-06-14 23:00:00');
 insert ignore into mydb.matches (name, tourId, format, startTime, endTime) values ('KER vs JFC', 4, 'soccer', '2022-04-09 18:00:00', '2022-04-09 23:00:00');
+
+insert ignore into mydb.news (title, description, matchId, tourId) values ('MI defeated CSK', 'MI defeated CSK in a thriller by 2 runs. Bumrah MOM.', 2, NULL);
+insert ignore into mydb.news (title, description, matchId, tourId) values ('RCB defeated GT', 'RCB defeated GT in a thriller by 2 wickets. Virat Kohli MOM.', 1, NULL);
+insert ignore into mydb.news (title, description, matchId, tourId) values ('IPL 2023 record viewership.', 'IPL 2023 broke all previous viewership record with 8cr concurrent viewers for final on FanCode.', NULL, 1);
+insert ignore into mydb.news (title, description, matchId, tourId) values ('MANCITY wins EPL 2023', 'MANCITY wins EPL 2023 with 3 matches still to go.', NULL, 4);
