@@ -16,11 +16,9 @@ const getMatchesByTourName = async (params) => {
     const cacheKey = JSON.stringify(parameters);
     const cachedResult = cache.get(cacheKey);
     if (cachedResult) {
-        console.log("comming from cache");
         return cachedResult;
     } else {
         const result = await mysql.query(statement, parameters);
-        console.log("coming from DB");
         cache.set(cacheKey, result, 600);
         return result;
     }
